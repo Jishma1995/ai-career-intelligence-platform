@@ -86,10 +86,7 @@ def calculate_match_score(resume_skills: list[str], jd_skills: list[str]) -> flo
     """
     # Avoid division by zero when no JD skills were found
     if not jd_skills:
-        return {
-        "success": False,
-        "message": "No recognizable skills were found in the job description."
-    }
+        return 0.0
 
     # Count how many JD skills also appear in the resume
     matched_count = 0
@@ -221,3 +218,51 @@ def generate_recommendations(missing_skills: list[str]) -> dict:
 
     return recommendations
 
+def analyze_match(resume_text: str, jd_text: str) -> dict:
+    """
+    Run the full skill match analysis for a resume and job description.
+
+    Args:
+        resume_text: Plain text extracted from the resume.
+        jd_text: Job description text pasted by the user.
+
+    Returns:
+        A dictionary with skills, scores, matched/missing skills, and recommendations.
+    """
+    # Extract skills from the resume and job description
+    resume_skills = extract_skills(resume_text)
+    jd_skills = extract_skills(jd_text)
+
+    # Cannot score a JD with no recognizable skills
+    if not jd_skills:
+        return {
+            "success": False,
+            "message": "No recognizable skills were found in the job description.",
+            "resume_skills": resume_skills,
+            "jd_skills": jd_skills,
+            "match_score": 0.0,
+            "matched_skills": [],
+            "missing_skills": [],
+            "recommendations": {},
+        }
+
+    # JD skills that also appear on the resume (preserve JD order)
+    matched_skills = []
+    for skill in jd_skills:
+        if skill in resume_skills:
+            matched_skills.append(skill)
+
+    # Score, gaps, and recommendations using existing helpers
+    match_score = calculate_match_score(resume_skills, jd_skills)
+    missing_skills = get_missing_skills(resume_skills, jd_skills)
+    recommendations = generate_recommendations(missing_skills)
+
+    return {
+        "success": True,
+        "resume_skills": resume_skills,
+        "jd_skills": jd_skills,
+        "match_score": match_score,
+        "matched_skills": matched_skills,
+        "missing_skills": missing_skills,
+        "recommendations": recommendations,
+    }

@@ -140,3 +140,4 @@ pymupdf
 - Suggest portfolio projects for each missing skill instead of only learning resources.
 - Recommend a learning sequence when multiple skills are missing (e.g., learn Python before LangChain).
 - Explain why each recommended skill is important for the target job role.
+- Return confidence scores and explain why each skill was classified as matched or missing.
