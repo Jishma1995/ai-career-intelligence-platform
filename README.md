@@ -128,4 +128,7 @@ pymupdf
 - Improve skill matching using regular expressions to avoid substring false positives.
 - Expand skill dictionary beyond AI/Data Science roles.
 - Add LLM-based skill extraction in a future version.
-
+- Introduce weighted skill scoring based on job requirement importance.
+- Optimize membership lookup using sets if the skill dictionary grows significantly.
+- Add semantic skill matching using embeddings instead of exact keyword matching.
+- Support common skill synonyms and abbreviations (e.g. LLM ↔ Large Language Model).

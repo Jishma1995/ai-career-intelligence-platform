@@ -101,3 +101,24 @@ def calculate_match_score(resume_skills: list[str], jd_skills: list[str]) -> flo
     score = (matched_count / len(jd_skills)) * 100
 
     return round(score, 2)
+
+
+def get_missing_skills(resume_skills: list[str], jd_skills: list[str]) -> list[str]:
+    """
+    Find skills required by the job description that are missing from the resume.
+
+    Args:
+        resume_skills: Skills found in the resume.
+        jd_skills: Skills found in the job description.
+
+    Returns:
+        JD skills that do not appear in the resume, in the same order as jd_skills.
+    """
+    missing_skills = []
+
+    # Walk through JD skills in order and keep only those not on the resume
+    for skill in jd_skills:
+        if skill not in resume_skills:
+            missing_skills.append(skill)
+
+    return missing_skills
