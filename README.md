@@ -128,3 +128,4 @@ pymupdf
 - Improve skill matching using regular expressions to avoid substring false positives.
 - Expand skill dictionary beyond AI/Data Science roles.
 - Add LLM-based skill extraction in a future version.
+

@@ -68,3 +68,36 @@ def extract_skills(text: str) -> list[str]:
             matched_skills.append(skill)
 
     return matched_skills
+
+
+def calculate_match_score(resume_skills: list[str], jd_skills: list[str]) -> float:
+    """
+    Calculate what percentage of job description skills appear on the resume.
+
+    Version 1 uses equal weighting: every JD skill counts the same.
+
+    Args:
+        resume_skills: Skills found in the resume.
+        jd_skills: Skills found in the job description.
+
+    Returns:
+        Match score as a percentage (0.00 to 100.00), rounded to 2 decimal places.
+        Returns 0.0 if the job description has no skills.
+    """
+    # Avoid division by zero when no JD skills were found
+    if not jd_skills:
+        return {
+        "success": False,
+        "message": "No recognizable skills were found in the job description."
+    }
+
+    # Count how many JD skills also appear in the resume
+    matched_count = 0
+    for skill in jd_skills:
+        if skill in resume_skills:
+            matched_count += 1
+
+    # Equal weighting: each JD skill contributes equally to the score
+    score = (matched_count / len(jd_skills)) * 100
+
+    return round(score, 2)
