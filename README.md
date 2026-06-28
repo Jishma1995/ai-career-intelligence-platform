@@ -17,23 +17,6 @@ Version 1 answers one question:
    - Missing skills
    - Basic recommendations
 
-## Version 1 File Map
-
-app.py
-- Streamlit user interface
-- Handles resume upload and job description input
-- Displays analysis results
-
-resume_parser.py
-- Extracts text from uploaded resume PDF
-
-skill_analyzer.py
-- Contains skill dictionary
-- Extracts skills from resume and job description text
-- Calculates match score
-- Identifies matched and missing skills
-- Generates basic recommendations
-
 ## Version 1 Scoring Logic
 
 Match Score = (Number of matched JD skills / Total JD skills) × 100
@@ -140,3 +123,8 @@ pymupdf
 - Ignore completely blank PDF pages before combining extracted text.
 - Add support for DOCX resumes.
 - Improve handling of scanned/image-only resumes.
+
+### Skill Analyzer
+- Improve skill matching using regular expressions to avoid substring false positives.
+- Expand skill dictionary beyond AI/Data Science roles.
+- Add LLM-based skill extraction in a future version.
