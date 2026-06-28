@@ -13,14 +13,14 @@ def display_skill_list(skills: list[str]) -> None:
 
 
 def display_recommendations(recommendations: dict) -> None:
-    """Show rule-based recommendations for missing skills."""
+    """Show each missing-skill recommendation in its own expander."""
     if not recommendations:
         st.write("No recommendations needed.")
         return
 
     for skill, recommendation in recommendations.items():
-        st.markdown(f"**{skill}**")
-        st.write(recommendation)
+        with st.expander(skill):
+            st.write(recommendation)
 
 
 # --- Page layout ---
@@ -65,26 +65,33 @@ if st.button("Analyze Resume"):
             else:
                 st.subheader("Analysis Results")
 
-                # Match score as a prominent metric
+                # 1. Match Score
                 st.metric(
                     label="Match Score",
                     value=f"{results['match_score']}%",
                 )
 
-                st.markdown("**Resume Skills**")
-                display_skill_list(results["resume_skills"])
-
-                st.markdown("**Job Description Skills**")
-                display_skill_list(results["jd_skills"])
-
+                # 2. Matched Skills
                 st.markdown("**Matched Skills**")
                 display_skill_list(results["matched_skills"])
 
+                # 3. Missing Skills
                 st.markdown("**Missing Skills**")
                 display_skill_list(results["missing_skills"])
 
+                # 4. Recommendations (one expander per missing skill)
                 st.markdown("**Recommendations**")
                 display_recommendations(results["recommendations"])
+
+                st.markdown("**Detailed Skill Breakdown**")
+
+                # 5. Resume Skills (collapsed by default)
+                with st.expander("Resume Skills"):
+                    display_skill_list(results["resume_skills"])
+
+                # 6. Job Description Skills (collapsed by default)
+                with st.expander("Job Description Skills"):
+                    display_skill_list(results["jd_skills"])
 
         except Exception as error:
             st.error(str(error))
