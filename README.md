@@ -132,3 +132,11 @@ pymupdf
 - Optimize membership lookup using sets if the skill dictionary grows significantly.
 - Add semantic skill matching using embeddings instead of exact keyword matching.
 - Support common skill synonyms and abbreviations (e.g. LLM ↔ Large Language Model).
+- Replace rule-based recommendations with LLM-generated personalized recommendations.
+- Recommend high-quality learning resources (official documentation, courses, GitHub repositories, and videos) dynamically instead of using predefined text.
+- Personalize recommendations based on the user's current skill level and target role.
+- Prioritize recommendations based on the importance of missing skills in the job description.
+- Estimate the learning difficulty and time required for each recommended skill.
+- Suggest portfolio projects for each missing skill instead of only learning resources.
+- Recommend a learning sequence when multiple skills are missing (e.g., learn Python before LangChain).
+- Explain why each recommended skill is important for the target job role.
