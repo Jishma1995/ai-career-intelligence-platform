@@ -133,3 +133,10 @@ analyze_match(
 streamlit
 pymupdf
 ```
+
+## Future Improvements
+
+### Resume Parser
+- Ignore completely blank PDF pages before combining extracted text.
+- Add support for DOCX resumes.
+- Improve handling of scanned/image-only resumes.
